@@ -21,7 +21,6 @@ profilesPerPage = 8
 number_of_posts = 8
 defaultDomain = 'https://twitter.com/'
 # static_twitter_profiles = []
-# OpStandUpToCFAA
 static_twitter_profiles = ['CNN', 'BBCNews']
 
 profilesCount = len(static_twitter_profiles)
