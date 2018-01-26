@@ -1,12 +1,21 @@
 import os
-import urllib2
+import sys
 import tempfile
 import webbrowser
 import time
 import datetime
 
+# urllib compatibility
+from pip._vendor.requests.packages.urllib3.connectionpool import xrange
+py_version = sys.version_info.major
+if py_version == 2:
+    import urllib2
+    from bs4 import BeautifulSoup
+elif py_version == 3:
+    import urllib.request
+    from bs4 import BeautifulSoup
+
 from shutil import copyfile
-from bs4 import BeautifulSoup
 from sys import platform
 
 # Free to use to gather post feeds
@@ -70,7 +79,10 @@ def custom_headers():
 # Gather Contents returns body of url > profile
 def contact_twitter(url):
     print("Contacting: " + url)
-    http_response = urllib2.urlopen(url)
+    if py_version == 2:
+        http_response = urllib2.urlopen(url)
+    elif py_version == 3:
+        http_response = urllib.request.urlopen(url)
     return BeautifulSoup(http_response, "html.parser")
 
 
@@ -88,7 +100,8 @@ def print_tweet(id, profile, name, showNumberOfPosts):
     f.write("<div id=\"slot-" + id + "\" class='collapse panel-body'>")
     f.write("<div class='slot'>")
     for x0 in xrange(showNumberOfPosts):
-        f.write(str(pull_tweets(soup_response=profile, post_index=x0)))
+            f.write(str(pull_tweets(soup_response=profile, post_index=x0)))
+
     f.write("</div>")
     f.write("</div>")
 
