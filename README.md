@@ -1,6 +1,9 @@
 # TwitScalpPy
 Scalp Twitter Posts In one area
 -------------------------------------------
+
+Compatibility: Currently supports python2 (urllib2)
+
 Requirements:
 BeautifulSoup, platform, copyfile, os, urllib2, webbrowser, time, datetime, tempfile
 
