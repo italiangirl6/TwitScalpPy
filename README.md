@@ -2,10 +2,11 @@
 Scalp Twitter Posts In one area
 -------------------------------------------
 
-Compatibility: Currently supports python2 (urllib2)
+Compatibility: Python2 & Python3
 
 Requirements:
-BeautifulSoup, platform, copyfile, os, urllib2, webbrowser, time, datetime, tempfile
+BeautifulSoup, urllib2 (Python2)
+beautifulsoup, urllib1 (Python3)
 
 
 To Run:
