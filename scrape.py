@@ -6,6 +6,7 @@ import time
 import datetime
 
 # urllib compatibility
+from pip._vendor.appdirs import unicode
 from pip._vendor.requests.packages.urllib3.connectionpool import xrange
 py_version = sys.version_info.major
 if py_version == 2:
@@ -100,7 +101,10 @@ def print_tweet(id, profile, name, showNumberOfPosts):
     f.write("<div id=\"slot-" + id + "\" class='collapse panel-body'>")
     f.write("<div class='slot'>")
     for x0 in xrange(showNumberOfPosts):
-            f.write(str(pull_tweets(soup_response=profile, post_index=x0)))
+        current_tweet = pull_tweets(soup_response=profile, post_index=x0).encode('utf-8').rstrip()
+        clean_tweet = ''.join(unicode(current_tweet, 'utf-8').splitlines())
+        clean_tweet = str(clean_tweet.encode('utf-8'))
+        f.write(clean_tweet)
 
     f.write("</div>")
     f.write("</div>")
@@ -140,7 +144,7 @@ if 'html' not in path:
 else:
     path = path
 f = open(path, 'w')
-f.write("""<!DOCTYPE html><head>""")
+f.write("""<!DOCTYPE html><head><meta charset='ISO-8859-1'> """)
 
 # CDN - BootStrap & jQuery plus custom CSS
 custom_headers()
@@ -200,7 +204,7 @@ f.write("""</div>
         </body></html>""")
 f.close()
 webbrowser.open('file://' + path)
-time.sleep(99)
+time.sleep(66)
 
 # Clean Tmp Dir
 if (os.path.exists(path)) & (save_scrapping == "false"):
